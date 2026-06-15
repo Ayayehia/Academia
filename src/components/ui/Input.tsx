@@ -33,6 +33,8 @@ export function Input({
   disabled = false,
   containerStyle,
   placeholder,
+  onFocus,
+  onBlur,
   ...rest
 }: InputProps) {
   const theme = useTheme();
@@ -56,8 +58,14 @@ export function Input({
         editable={!disabled}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.textMuted}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        onFocus={(e) => {
+          setFocused(true);
+          onFocus?.(e);
+        }}
+        onBlur={(e) => {
+          setFocused(false);
+          onBlur?.(e);
+        }}
         accessibilityLabel={label}
         accessibilityState={{ disabled }}
         accessibilityHint={error}

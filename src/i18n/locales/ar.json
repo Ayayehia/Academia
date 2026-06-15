@@ -5,5 +5,35 @@
   "placeholder": {
     "auth": "شاشة المصادقة المؤقتة",
     "home": "الشاشة الرئيسية المؤقتة"
+  },
+  "auth": {
+    "register": {
+      "title": "أنشئ حسابك",
+      "subtitle": "سجّل للبدء",
+      "nameLabel": "الاسم",
+      "namePlaceholder": "اسمك",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "أنشئ كلمة مرور",
+      "submit": "إنشاء حساب",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "loginLink": "تسجيل الدخول",
+      "errors": {
+        "nameRequired": "الاسم مطلوب.",
+        "nameMin": "يجب أن يتكون الاسم من حرفين على الأقل.",
+        "emailRequired": "البريد الإلكتروني مطلوب.",
+        "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا.",
+        "passwordRequired": "كلمة المرور مطلوبة.",
+        "passwordInvalid": "كلمة المرور لا تستوفي المتطلبات."
+      },
+      "rules": {
+        "minLength": "8 أحرف على الأقل",
+        "upper": "حرف كبير واحد",
+        "lower": "حرف صغير واحد",
+        "number": "رقم واحد",
+        "special": "رمز خاص واحد (!@#$%^&*)"
+      }
+    }
   }
 }

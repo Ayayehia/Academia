@@ -5,5 +5,35 @@
   "placeholder": {
     "auth": "Auth placeholder screen",
     "home": "Home placeholder screen"
+  },
+  "auth": {
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Sign up to get started",
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Create a password",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Log in",
+      "errors": {
+        "nameRequired": "Name is required.",
+        "nameMin": "Name must be at least 2 characters.",
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Enter a valid email address.",
+        "passwordRequired": "Password is required.",
+        "passwordInvalid": "Password does not meet the requirements."
+      },
+      "rules": {
+        "minLength": "At least 8 characters",
+        "upper": "One uppercase letter",
+        "lower": "One lowercase letter",
+        "number": "One number",
+        "special": "One special character (!@#$%^&*)"
+      }
+    }
   }
 }
