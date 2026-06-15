@@ -1,0 +1,9 @@
+{
+  "common": {
+    "appName": "RN Learning App"
+  },
+  "placeholder": {
+    "auth": "Auth placeholder screen",
+    "home": "Home placeholder screen"
+  }
+}
