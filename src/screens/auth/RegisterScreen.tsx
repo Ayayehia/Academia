@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { Button, Input, ScreenContainer } from '../../components';
+import { Button, Input, ScreenContainer, SocialAuthButtons } from '../../components';
+import { useSignInFlow } from '../../hooks/useSignInFlow';
 import { type AuthStackParamList } from '../../navigation/types';
-import { type AuthSession, useAuthStore } from '../../store/authStore';
+import { type AuthSession } from '../../store/authStore';
 import { useTheme } from '../../theme';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Register'>;
@@ -45,7 +46,7 @@ function mockRegister(values: { name: string; email: string }): Promise<AuthSess
 export default function RegisterScreen({ navigation }: Props) {
   const { t } = useTranslation();
   const theme = useTheme();
-  const signIn = useAuthStore((s) => s.signIn);
+  const { completeSignIn } = useSignInFlow();
 
   const [values, setValues] = useState({ name: '', email: '', password: '' });
   const [touched, setTouched] = useState<Record<FieldKey, boolean>>({
@@ -95,9 +96,10 @@ export default function RegisterScreen({ navigation }: Props) {
     if (!isFormValid || submitting) return;
     setSubmitting(true);
     const session = await mockRegister(values);
-    // Saving the session flips isAuthenticated → RootNavigator swaps to the
-    // app stack. No manual navigation to Home needed.
-    signIn(session);
+    // completeSignIn saves the session (flips isAuthenticated → RootNavigator
+    // swaps to the app stack) and offers biometric enrollment after the first
+    // successful auth. No manual navigation to Home needed.
+    await completeSignIn(session);
   };
 
   return (
@@ -200,6 +202,8 @@ export default function RegisterScreen({ navigation }: Props) {
           fullWidth
           size="lg"
         />
+
+        <SocialAuthButtons disabled={submitting} />
 
         <View style={[styles.loginRow, { gap: theme.spacing.xs }]}>
           <Text style={{ color: theme.colors.textMuted, fontSize: theme.typography.sizes.md }}>

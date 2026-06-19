@@ -34,6 +34,35 @@
         "number": "رقم واحد",
         "special": "رمز خاص واحد (!@#$%^&*)"
       }
+    },
+    "login": {
+      "title": "مرحبًا بعودتك",
+      "subtitle": "سجّل الدخول للمتابعة",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "كلمة المرور الخاصة بك",
+      "submit": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟",
+      "registerLink": "إنشاء حساب",
+      "errors": {
+        "emailRequired": "البريد الإلكتروني مطلوب.",
+        "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا.",
+        "passwordRequired": "كلمة المرور مطلوبة."
+      }
+    },
+    "social": {
+      "divider": "أو تابع باستخدام",
+      "google": "المتابعة باستخدام Google",
+      "apple": "المتابعة باستخدام Apple",
+      "error": "حدث خطأ ما، يرجى المحاولة مرة أخرى."
+    },
+    "biometric": {
+      "enableTitle": "تفعيل تسجيل الدخول بالبصمة؟",
+      "enableMessage": "استخدم Face ID أو Touch ID أو بصمتك لتسجيل الدخول بشكل أسرع في المرة القادمة.",
+      "enable": "تفعيل",
+      "notNow": "ليس الآن",
+      "promptMessage": "قم بالمصادقة للمتابعة"
     }
   }
 }

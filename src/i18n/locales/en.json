@@ -34,6 +34,35 @@
         "number": "One number",
         "special": "One special character (!@#$%^&*)"
       }
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Log in to continue",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Your password",
+      "submit": "Log in",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Sign up",
+      "errors": {
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Enter a valid email address.",
+        "passwordRequired": "Password is required."
+      }
+    },
+    "social": {
+      "divider": "Or continue with",
+      "google": "Continue with Google",
+      "apple": "Continue with Apple",
+      "error": "Something went wrong, please try again."
+    },
+    "biometric": {
+      "enableTitle": "Enable biometric login?",
+      "enableMessage": "Use Face ID, Touch ID, or your fingerprint to sign in faster next time.",
+      "enable": "Enable",
+      "notNow": "Not now",
+      "promptMessage": "Authenticate to continue"
     }
   }
 }
