@@ -1,12 +1,20 @@
 {
   "common": {
     "appName": "RN Learning App",
-    "ok": "OK",
-    "devSignOut": "Sign out (dev)"
+    "ok": "OK"
   },
   "placeholder": {
     "auth": "Auth placeholder screen",
     "home": "Home placeholder screen"
+  },
+  "app": {
+    "home": {
+      "settings": "Settings"
+    },
+    "settings": {
+      "title": "Settings",
+      "logout": "Log out"
+    }
   },
   "auth": {
     "register": {

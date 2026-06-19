@@ -102,7 +102,9 @@ export default function RootNavigator() {
       ) : isAuthenticated ? (
         <AppNavigator />
       ) : (
-        <AuthNavigator initialRouteName={gate === 'failed' ? 'Login' : 'Register'} />
+        // Unauthenticated (fresh launch, after logout, or failed biometric
+        // unlock) always lands on Login — AuthNavigator's default route.
+        <AuthNavigator />
       )}
     </NavigationContainer>
   );

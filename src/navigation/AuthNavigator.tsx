@@ -9,13 +9,13 @@ import { type AuthStackParamList } from './types';
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 type AuthNavigatorProps = {
-  /** Which auth screen to land on. Defaults to Register; RootNavigator passes
-   *  'Login' when a biometric unlock fails on launch. */
+  /** Which auth screen to land on. Defaults to Login (no session → Login);
+   *  Register stays reachable via the "Sign up" link on Login. */
   initialRouteName?: keyof AuthStackParamList;
 };
 
 // Shown when the user is not authenticated.
-export default function AuthNavigator({ initialRouteName = 'Register' }: AuthNavigatorProps) {
+export default function AuthNavigator({ initialRouteName = 'Login' }: AuthNavigatorProps) {
   return (
     <Stack.Navigator initialRouteName={initialRouteName} screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Register" component={RegisterScreen} />
