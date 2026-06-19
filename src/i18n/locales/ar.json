@@ -1,6 +1,8 @@
 {
   "common": {
-    "appName": "تطبيق تعلّم RN"
+    "appName": "تطبيق تعلّم RN",
+    "ok": "حسنًا",
+    "devSignOut": "تسجيل الخروج (تجريبي)"
   },
   "placeholder": {
     "auth": "شاشة المصادقة المؤقتة",
@@ -43,6 +45,7 @@
       "passwordLabel": "كلمة المرور",
       "passwordPlaceholder": "كلمة المرور الخاصة بك",
       "submit": "تسجيل الدخول",
+      "forgotLink": "هل نسيت كلمة المرور؟",
       "noAccount": "ليس لديك حساب؟",
       "registerLink": "إنشاء حساب",
       "errors": {
@@ -63,6 +66,34 @@
       "enable": "تفعيل",
       "notNow": "ليس الآن",
       "promptMessage": "قم بالمصادقة للمتابعة"
+    },
+    "forgot": {
+      "title": "نسيت كلمة المرور",
+      "subtitle": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "submit": "إرسال رابط إعادة التعيين",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "errors": {
+        "emailRequired": "البريد الإلكتروني مطلوب.",
+        "emailInvalid": "أدخل بريدًا إلكترونيًا صالحًا."
+      }
+    },
+    "newPassword": {
+      "title": "تعيين كلمة مرور جديدة",
+      "subtitle": "إعادة تعيين كلمة المرور لـ {{email}}",
+      "passwordLabel": "كلمة المرور الجديدة",
+      "passwordPlaceholder": "أنشئ كلمة مرور جديدة",
+      "confirmLabel": "تأكيد كلمة المرور",
+      "confirmPlaceholder": "أعد إدخال كلمة المرور الجديدة",
+      "submit": "إعادة تعيين كلمة المرور",
+      "errors": {
+        "passwordRequired": "كلمة المرور مطلوبة.",
+        "confirmRequired": "يرجى تأكيد كلمة المرور.",
+        "mismatch": "كلمتا المرور غير متطابقتين."
+      },
+      "successTitle": "تمت إعادة تعيين كلمة المرور",
+      "successMessage": "تمت إعادة تعيين كلمة المرور الخاصة بك. يرجى تسجيل الدخول بكلمة المرور الجديدة."
     }
   }
 }

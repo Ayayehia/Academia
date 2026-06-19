@@ -1,6 +1,8 @@
 {
   "common": {
-    "appName": "RN Learning App"
+    "appName": "RN Learning App",
+    "ok": "OK",
+    "devSignOut": "Sign out (dev)"
   },
   "placeholder": {
     "auth": "Auth placeholder screen",
@@ -43,6 +45,7 @@
       "passwordLabel": "Password",
       "passwordPlaceholder": "Your password",
       "submit": "Log in",
+      "forgotLink": "Forgot password?",
       "noAccount": "Don't have an account?",
       "registerLink": "Sign up",
       "errors": {
@@ -63,6 +66,34 @@
       "enable": "Enable",
       "notNow": "Not now",
       "promptMessage": "Authenticate to continue"
+    },
+    "forgot": {
+      "title": "Forgot password",
+      "subtitle": "Enter your email and we'll send you a reset link.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "submit": "Send reset link",
+      "backToLogin": "Back to login",
+      "errors": {
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Enter a valid email address."
+      }
+    },
+    "newPassword": {
+      "title": "Set a new password",
+      "subtitle": "Resetting the password for {{email}}",
+      "passwordLabel": "New password",
+      "passwordPlaceholder": "Create a new password",
+      "confirmLabel": "Confirm password",
+      "confirmPlaceholder": "Re-enter your new password",
+      "submit": "Reset password",
+      "errors": {
+        "passwordRequired": "Password is required.",
+        "confirmRequired": "Please confirm your password.",
+        "mismatch": "Passwords do not match."
+      },
+      "successTitle": "Password reset",
+      "successMessage": "Your password has been reset. Please log in with your new password."
     }
   }
 }

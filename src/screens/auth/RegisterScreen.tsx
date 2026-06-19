@@ -3,31 +3,18 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { Button, Input, ScreenContainer, SocialAuthButtons } from '../../components';
+import { Button, Input, PasswordChecklist, ScreenContainer, SocialAuthButtons } from '../../components';
 import { useSignInFlow } from '../../hooks/useSignInFlow';
+import { isEmailValid, isPasswordValid } from '../../lib/validation';
 import { type AuthStackParamList } from '../../navigation/types';
 import { type AuthSession } from '../../store/authStore';
 import { useTheme } from '../../theme';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Register'>;
 
-// --- Validation (pure helpers, co-located) -------------------------------
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+// Name validation is register-only; email + password rules come from the
+// shared validation lib (reused by Login and the password-reset screens).
 const isNameValid = (v: string) => v.trim().length >= 2;
-const isEmailValid = (v: string) => EMAIL_RE.test(v.trim());
-
-// Per-rule booleans powering both the live checklist and overall validity.
-const passwordRules = (v: string) => ({
-  minLength: v.length >= 8,
-  upper: /[A-Z]/.test(v),
-  lower: /[a-z]/.test(v),
-  number: /[0-9]/.test(v),
-  special: /[!@#$%^&*]/.test(v),
-});
-const isPasswordValid = (v: string) => Object.values(passwordRules(v)).every(Boolean);
-
-const RULE_KEYS = ['minLength', 'upper', 'lower', 'number', 'special'] as const;
 
 type FieldKey = 'name' | 'email' | 'password';
 
@@ -64,7 +51,6 @@ export default function RegisterScreen({ navigation }: Props) {
   // Validity is derived every render from current values.
   const nameValid = isNameValid(values.name);
   const emailValid = isEmailValid(values.email);
-  const rules = passwordRules(values.password);
   const passwordValid = isPasswordValid(values.password);
   const isFormValid = nameValid && emailValid && passwordValid;
 
@@ -166,31 +152,7 @@ export default function RegisterScreen({ navigation }: Props) {
             />
 
             {/* Live checklist — updates on every keystroke. */}
-            <View style={{ gap: theme.spacing.xs }}>
-              {RULE_KEYS.map((key) => {
-                const met = rules[key];
-                return (
-                  <View key={key} style={styles.ruleRow}>
-                    <Text
-                      style={{
-                        color: met ? theme.colors.success : theme.colors.textMuted,
-                        fontSize: theme.typography.sizes.md,
-                      }}
-                    >
-                      {met ? '✓' : '○'}
-                    </Text>
-                    <Text
-                      style={{
-                        color: met ? theme.colors.success : theme.colors.textMuted,
-                        fontSize: theme.typography.sizes.sm,
-                      }}
-                    >
-                      {t(`auth.register.rules.${key}`)}
-                    </Text>
-                  </View>
-                );
-              })}
-            </View>
+            <PasswordChecklist value={values.password} />
           </View>
         </View>
 
@@ -236,6 +198,5 @@ const styles = StyleSheet.create({
   title: { textAlign: 'left' },
   subtitle: { fontSize: 14 },
   form: {},
-  ruleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   loginRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
 });

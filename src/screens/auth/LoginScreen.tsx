@@ -5,15 +5,12 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { Button, Input, ScreenContainer, SocialAuthButtons } from '../../components';
 import { useSignInFlow } from '../../hooks/useSignInFlow';
+import { isEmailValid } from '../../lib/validation';
 import { type AuthStackParamList } from '../../navigation/types';
 import { type AuthSession } from '../../store/authStore';
 import { useTheme } from '../../theme';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
-
-// --- Validation (pure helpers, mirrors RegisterScreen) -------------------
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const isEmailValid = (v: string) => EMAIL_RE.test(v.trim());
 
 type FieldKey = 'email' | 'password';
 
@@ -122,6 +119,23 @@ export default function LoginScreen({ navigation }: Props) {
           />
         </View>
 
+        <Pressable
+          onPress={() => navigation.navigate('ForgotPassword')}
+          accessibilityRole="link"
+          hitSlop={8}
+          style={styles.forgotRow}
+        >
+          <Text
+            style={{
+              color: theme.colors.primary,
+              fontSize: theme.typography.sizes.md,
+              fontWeight: theme.typography.weights.medium,
+            }}
+          >
+            {t('auth.login.forgotLink')}
+          </Text>
+        </Pressable>
+
         <Button
           title={t('auth.login.submit')}
           onPress={onSubmit}
@@ -164,5 +178,6 @@ const styles = StyleSheet.create({
   title: { textAlign: 'left' },
   subtitle: { fontSize: 14 },
   form: {},
+  forgotRow: { alignSelf: 'flex-end' },
   registerRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
 });
