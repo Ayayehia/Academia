@@ -9,7 +9,11 @@
   },
   "app": {
     "home": {
-      "settings": "Settings"
+      "settings": "Settings",
+      "profile": "Profile",
+      "notifications": "Notifications",
+      "profilePlaceholder": "Profile is coming soon.",
+      "notificationsPlaceholder": "Notifications are coming soon."
     },
     "settings": {
       "title": "Settings",

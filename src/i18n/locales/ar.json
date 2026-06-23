@@ -9,7 +9,11 @@
   },
   "app": {
     "home": {
-      "settings": "الإعدادات"
+      "settings": "الإعدادات",
+      "profile": "الملف الشخصي",
+      "notifications": "الإشعارات",
+      "profilePlaceholder": "الملف الشخصي قادم قريبًا.",
+      "notificationsPlaceholder": "الإشعارات قادمة قريبًا."
     },
     "settings": {
       "title": "الإعدادات",

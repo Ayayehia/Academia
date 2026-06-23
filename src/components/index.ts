@@ -1,6 +1,7 @@
 // Shared UI component library — pure, theme-aware, accessible building blocks.
 // Import via the barrel, e.g. `import { Button, CourseCard } from '../components';`
 
+export * from './app/HomeHeader';
 export * from './auth/PasswordChecklist';
 export * from './auth/SocialAuthButtons';
 export * from './ui/Badge';
