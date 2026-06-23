@@ -10,4 +10,6 @@ export type AuthStackParamList = {
 export type AppStackParamList = {
   Home: undefined;
   Settings: undefined;
+  // Placeholder for Story 2.3 (Course Detail). Carousel taps route here for now.
+  CourseDetail: { courseId: string };
 };

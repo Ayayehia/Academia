@@ -13,11 +13,17 @@
       "profile": "Profile",
       "notifications": "Notifications",
       "profilePlaceholder": "Profile is coming soon.",
-      "notificationsPlaceholder": "Notifications are coming soon."
+      "notificationsPlaceholder": "Notifications are coming soon.",
+      "featuredTitle": "Featured courses",
+      "ratingA11y": "Rated {{value}} out of 5"
     },
     "settings": {
       "title": "Settings",
       "logout": "Log out"
+    },
+    "courseDetail": {
+      "title": "Course detail",
+      "placeholder": "Course detail is coming soon. Course ID:"
     }
   },
   "auth": {

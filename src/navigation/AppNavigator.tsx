@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import CourseDetailScreen from '../screens/app/CourseDetailScreen';
 import HomeScreen from '../screens/app/HomeScreen';
 import SettingsScreen from '../screens/app/SettingsScreen';
 import { type AppStackParamList } from './types';
@@ -12,6 +13,7 @@ export default function AppNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Settings" component={SettingsScreen} />
+      <Stack.Screen name="CourseDetail" component={CourseDetailScreen} />
     </Stack.Navigator>
   );
 }

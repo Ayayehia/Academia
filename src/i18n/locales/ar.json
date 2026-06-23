@@ -13,11 +13,17 @@
       "profile": "الملف الشخصي",
       "notifications": "الإشعارات",
       "profilePlaceholder": "الملف الشخصي قادم قريبًا.",
-      "notificationsPlaceholder": "الإشعارات قادمة قريبًا."
+      "notificationsPlaceholder": "الإشعارات قادمة قريبًا.",
+      "featuredTitle": "الدورات المميزة",
+      "ratingA11y": "التقييم {{value}} من 5"
     },
     "settings": {
       "title": "الإعدادات",
       "logout": "تسجيل الخروج"
+    },
+    "courseDetail": {
+      "title": "تفاصيل الدورة",
+      "placeholder": "تفاصيل الدورة قادمة قريبًا. معرّف الدورة:"
     }
   },
   "auth": {
