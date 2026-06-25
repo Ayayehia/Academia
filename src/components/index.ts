@@ -3,6 +3,7 @@
 
 export * from './app/FeaturedCarousel';
 export * from './app/HomeHeader';
+export * from './app/SubscriptionBanner';
 export * from './auth/PasswordChecklist';
 export * from './auth/SocialAuthButtons';
 export * from './ui/Badge';

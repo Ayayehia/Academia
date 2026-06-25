@@ -24,6 +24,24 @@
     "courseDetail": {
       "title": "تفاصيل الدورة",
       "placeholder": "تفاصيل الدورة قادمة قريبًا. معرّف الدورة:"
+    },
+    "subscriptionBanner": {
+      "headline": "اشترك في النسخة المميزة",
+      "description": "افتح كل الدورات وتعلّم بلا حدود.",
+      "cta": "اشترك الآن"
+    },
+    "subscription": {
+      "title": "الاشتراك",
+      "placeholder": "الاشتراك قادم قريبًا."
+    },
+    "listing": {
+      "title": "القائمة",
+      "placeholder": "القائمة قادمة قريبًا."
+    },
+    "tabs": {
+      "home": "الرئيسية",
+      "listing": "القائمة",
+      "settings": "الإعدادات"
     }
   },
   "auth": {

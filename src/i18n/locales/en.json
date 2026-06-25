@@ -24,6 +24,24 @@
     "courseDetail": {
       "title": "Course detail",
       "placeholder": "Course detail is coming soon. Course ID:"
+    },
+    "subscriptionBanner": {
+      "headline": "Go Premium",
+      "description": "Unlock every course and learn without limits.",
+      "cta": "Subscribe now"
+    },
+    "subscription": {
+      "title": "Subscription",
+      "placeholder": "Subscription is coming soon."
+    },
+    "listing": {
+      "title": "Listing",
+      "placeholder": "Listing is coming soon."
+    },
+    "tabs": {
+      "home": "Home",
+      "listing": "Listing",
+      "settings": "Settings"
     }
   },
   "auth": {
