@@ -23,7 +23,14 @@
     },
     "courseDetail": {
       "title": "Course detail",
-      "placeholder": "Course detail is coming soon. Course ID:"
+      "instructorLabel": "Instructor",
+      "durationLabel": "Duration",
+      "enroll": "Enroll Now",
+      "enrollAlert": "Enrollment flow will be implemented later.",
+      "description": "Master the fundamentals through hands-on lessons and real-world projects. This course breaks complex topics into clear, practical steps, with guided exercises after every module so you build lasting skills you can apply immediately.",
+      "errorTitle": "Couldn't load course",
+      "errorMessage": "Please check your connection and try again.",
+      "retry": "Retry"
     },
     "subscriptionBanner": {
       "headline": "Go Premium",
@@ -36,7 +43,9 @@
     },
     "listing": {
       "title": "Listing",
-      "placeholder": "Listing is coming soon."
+      "errorTitle": "Couldn't load courses",
+      "errorMessage": "Please check your connection and try again.",
+      "retry": "Retry"
     },
     "tabs": {
       "home": "Home",

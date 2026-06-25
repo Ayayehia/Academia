@@ -5,8 +5,8 @@ import { useAuthStore } from '../store/authStore';
 // Single configured Axios instance. Future data hooks import this.
 // No real requests are made during technical setup.
 export const apiClient = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
-  timeout: 10_000,
+  baseURL: 'https://dummyjson.com',
+  timeout: 15_000,
   headers: { 'Content-Type': 'application/json' },
 });
 
