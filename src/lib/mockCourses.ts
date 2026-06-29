@@ -1,5 +1,8 @@
-// Mock featured-course data. No API yet (Story 2.2) — a static list the Home
-// carousel renders. The shape is the minimum needed by CourseCard.
+// Featured courses for the Home carousel. Sourced from the same courses.json as
+// the Listing and Course Detail, so a tapped featured card's id always resolves
+// in the detail screen (single source of truth).
+
+import coursesData from '../data/courses.json';
 
 export type Course = {
   id: string;
@@ -11,47 +14,12 @@ export type Course = {
   thumbnailUri: string;
 };
 
-const thumb = (seed: string) => `https://picsum.photos/seed/${seed}/400/240`;
-
-export const FEATURED_COURSES: Course[] = [
-  {
-    id: 'rn-essentials',
-    title: 'React Native Essentials',
-    category: 'Mobile',
-    rating: 4.8,
-    instructor: 'Sara Khaled',
-    thumbnailUri: thumb('rn-essentials'),
-  },
-  {
-    id: 'ts-deep-dive',
-    title: 'TypeScript Deep Dive',
-    category: 'Programming',
-    rating: 4.7,
-    instructor: 'Omar Tarek',
-    thumbnailUri: thumb('ts-deep-dive'),
-  },
-  {
-    id: 'ui-design-basics',
-    title: 'UI Design Basics',
-    category: 'Design',
-    rating: 4.6,
-    instructor: 'Lina Hassan',
-    thumbnailUri: thumb('ui-design-basics'),
-  },
-  {
-    id: 'node-apis',
-    title: 'Building APIs with Node',
-    category: 'Backend',
-    rating: 4.5,
-    instructor: 'Youssef Adel',
-    thumbnailUri: thumb('node-apis'),
-  },
-  {
-    id: 'data-structures',
-    title: 'Data Structures in Practice',
-    category: 'Computer Science',
-    rating: 4.9,
-    instructor: 'Mona Fathy',
-    thumbnailUri: thumb('data-structures'),
-  },
-];
+// First few courses, mapped to the carousel's Course shape.
+export const FEATURED_COURSES: Course[] = coursesData.slice(0, 5).map((c) => ({
+  id: c.id,
+  title: c.title,
+  category: c.category,
+  rating: c.rating,
+  instructor: c.instructor,
+  thumbnailUri: c.thumbnailUri,
+}));
