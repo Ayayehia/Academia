@@ -16,7 +16,7 @@ export default function CourseDetailScreen({ navigation, route }: Props) {
   const theme = useTheme();
   const { courseId } = route.params;
 
-  const { data, status, refetch } = useCourseDetail(courseId, t('app.courseDetail.description'));
+  const { data, status, refetch } = useCourseDetail(courseId);
 
   const onEnroll = () => Alert.alert(t('app.courseDetail.enrollAlert'));
 

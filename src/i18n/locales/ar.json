@@ -15,10 +15,27 @@
       "profilePlaceholder": "الملف الشخصي قادم قريبًا.",
       "notificationsPlaceholder": "الإشعارات قادمة قريبًا.",
       "featuredTitle": "الدورات المميزة",
-      "ratingA11y": "التقييم {{value}} من 5"
+      "ratingA11y": "التقييم {{value}} من 5",
+      "languageA11y": "تغيير اللغة"
+    },
+    "language": {
+      "restartTitle": "يلزم إعادة التشغيل",
+      "restartMessage": "سيُعاد تشغيل التطبيق لتطبيق اتجاه التخطيط الجديد.",
+      "restartNow": "إعادة التشغيل الآن"
     },
     "settings": {
       "title": "الإعدادات",
+      "themeLabel": "السمة",
+      "themeLight": "فاتح",
+      "themeDark": "داكن",
+      "fontLabel": "حجم الخط",
+      "fontSmall": "صغير",
+      "fontMedium": "متوسط",
+      "fontLarge": "كبير",
+      "languageLabel": "اللغة",
+      "langEn": "الإنجليزية",
+      "langAr": "العربية",
+      "biometricsLabel": "تسجيل الدخول بالبصمة",
       "logout": "تسجيل الخروج"
     },
     "courseDetail": {
@@ -27,7 +44,6 @@
       "durationLabel": "المدة",
       "enroll": "سجّل الآن",
       "enrollAlert": "سيتم تنفيذ عملية التسجيل لاحقًا.",
-      "description": "أتقن الأساسيات من خلال دروس عملية ومشاريع واقعية. تقسّم هذه الدورة الموضوعات المعقّدة إلى خطوات واضحة وعملية، مع تمارين موجّهة بعد كل وحدة لتبني مهارات راسخة يمكنك تطبيقها فورًا.",
       "errorTitle": "تعذّر تحميل الدورة",
       "errorMessage": "يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
       "retry": "إعادة المحاولة"

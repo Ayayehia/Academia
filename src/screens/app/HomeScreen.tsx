@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { FeaturedCarousel, HomeHeader, SubscriptionBanner } from '../../components';
+import { FeaturedCarousel, HomeHeader, LanguageToggle, SubscriptionBanner } from '../../components';
 import { FEATURED_COURSES } from '../../lib/mockCourses';
 import { MOCK_IS_SUBSCRIBED } from '../../lib/subscription';
 import { type AppStackParamList, type MainTabsParamList } from '../../navigation/types';
@@ -30,11 +30,11 @@ export default function HomeScreen({ navigation }: Props) {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       edges={['top']}
     >
-      {/* Fixed: rendered outside the ScrollView so it stays pinned. Settings is
-          reachable from the bottom tab now, so the header shows just the icons. */}
+      {/* Fixed: rendered outside the ScrollView so it stays pinned. */}
       <HomeHeader
         onProfilePress={() => Alert.alert(t('app.home.profilePlaceholder'))}
         onNotificationPress={() => Alert.alert(t('app.home.notificationsPlaceholder'))}
+        right={<LanguageToggle />}
       />
 
       <ScrollView

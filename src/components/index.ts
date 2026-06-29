@@ -3,6 +3,7 @@
 
 export * from './app/FeaturedCarousel';
 export * from './app/HomeHeader';
+export * from './app/LanguageToggle';
 export * from './app/SubscriptionBanner';
 export * from './auth/PasswordChecklist';
 export * from './auth/SocialAuthButtons';
@@ -15,4 +16,5 @@ export * from './ui/Header';
 export * from './ui/Input';
 export * from './ui/LoadingSpinner';
 export * from './ui/ScreenContainer';
+export * from './ui/SegmentedControl';
 export * from './ui/SkeletonLoader';

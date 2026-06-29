@@ -23,6 +23,16 @@ export const typography = {
   weights: { regular: '400', medium: '500', bold: '700' },
 } as const;
 
+// User-selectable font size. The scale multiplies every typography token so the
+// whole app's text resizes from a single setting.
+export type FontSize = 'small' | 'medium' | 'large';
+
+export const fontScale: Record<FontSize, number> = {
+  small: 0.9,
+  medium: 1,
+  large: 1.18,
+};
+
 export const palette = {
   light: {
     background: '#FFFFFF',

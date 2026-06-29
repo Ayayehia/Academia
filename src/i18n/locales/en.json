@@ -15,10 +15,27 @@
       "profilePlaceholder": "Profile is coming soon.",
       "notificationsPlaceholder": "Notifications are coming soon.",
       "featuredTitle": "Featured courses",
-      "ratingA11y": "Rated {{value}} out of 5"
+      "ratingA11y": "Rated {{value}} out of 5",
+      "languageA11y": "Change language"
+    },
+    "language": {
+      "restartTitle": "Restart required",
+      "restartMessage": "The app will restart to apply the new layout direction.",
+      "restartNow": "Restart now"
     },
     "settings": {
       "title": "Settings",
+      "themeLabel": "Theme",
+      "themeLight": "Light",
+      "themeDark": "Dark",
+      "fontLabel": "Font size",
+      "fontSmall": "Small",
+      "fontMedium": "Medium",
+      "fontLarge": "Large",
+      "languageLabel": "Language",
+      "langEn": "English",
+      "langAr": "العربية",
+      "biometricsLabel": "Biometric login",
       "logout": "Log out"
     },
     "courseDetail": {
@@ -27,7 +44,6 @@
       "durationLabel": "Duration",
       "enroll": "Enroll Now",
       "enrollAlert": "Enrollment flow will be implemented later.",
-      "description": "Master the fundamentals through hands-on lessons and real-world projects. This course breaks complex topics into clear, practical steps, with guided exercises after every module so you build lasting skills you can apply immediately.",
       "errorTitle": "Couldn't load course",
       "errorMessage": "Please check your connection and try again.",
       "retry": "Retry"

@@ -1,28 +1,11 @@
-import { apiClient } from './client';
+import coursesData from '../data/courses.json';
 
-// Dedicated API/service layer. The data SOURCE is dummyjson's /products (a fast
-// mock API), but it's mapped onto our stable internal Course model so screens
-// and components never depend on the external API's shape. Swap the source here
-// without touching any UI.
+// Dedicated data/service layer. The SOURCE is now a local courses.json file,
+// but it's served through the same async, paginated functions so the screens,
+// hooks, loading/error states, and the internal model are all unchanged. Swap
+// this back to a real HTTP API (via apiClient) any time without touching the UI.
 
-// Raw dummyjson product (only the fields we use).
-type Product = {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  rating: number;
-  thumbnail: string;
-};
-
-type ProductsResponse = {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
-};
-
-// Stable internal model — unchanged regardless of the API source.
+// Stable internal model.
 export type ListingCourse = {
   id: string;
   title: string;
@@ -31,34 +14,7 @@ export type ListingCourse = {
   thumbnailUri: string;
 };
 
-export const PHOTOS_PAGE_SIZE = 10;
-
-// dummyjson provides real category + rating, so those props map straight across.
-export function toListingCourse(p: Product): ListingCourse {
-  return {
-    id: String(p.id),
-    title: p.title,
-    category: p.category,
-    rating: p.rating,
-    thumbnailUri: p.thumbnail,
-  };
-}
-
-/** GET /products?limit=<n>&skip=<n> → enriched listing courses (page is 1-based). */
-export async function fetchListingCourses(
-  page: number,
-  limit = PHOTOS_PAGE_SIZE,
-): Promise<ListingCourse[]> {
-  const { data } = await apiClient.get<ProductsResponse>('/products', {
-    params: { limit, skip: (page - 1) * limit },
-  });
-  return data.products.map(toListingCourse);
-}
-
-// --- Course detail ------------------------------------------------------
-
-// Full detail shape. The API has no instructor/avatar/duration, so those stay
-// mocked deterministically from the id (stable per course).
+// Full detail shape (everything in the JSON).
 export type CourseDetail = ListingCourse & {
   instructor: string;
   instructorAvatarUri: string;
@@ -66,26 +22,38 @@ export type CourseDetail = ListingCourse & {
   duration: string;
 };
 
-const INSTRUCTORS = ['Sara Khaled', 'Omar Tarek', 'Lina Hassan', 'Youssef Adel', 'Mona Fathy'];
+export const PHOTOS_PAGE_SIZE = 10;
 
-const mockInstructor = (id: number) => INSTRUCTORS[id % INSTRUCTORS.length];
-// pravatar serves 70 sample avatars (1–70).
-const mockAvatar = (id: number) => `https://i.pravatar.cc/150?img=${(id % 70) + 1}`;
-const mockDuration = (id: number) => `${3 + (id % 8)}h ${(id % 6) * 10}m`;
+const ALL_COURSES = coursesData as CourseDetail[];
 
-export function toCourseDetail(p: Product, description: string): CourseDetail {
-  return {
-    ...toListingCourse(p),
-    instructor: mockInstructor(p.id),
-    instructorAvatarUri: mockAvatar(p.id),
-    description,
-    duration: mockDuration(p.id),
-  };
+// Small artificial delay so the loading skeletons remain visible (mimics a
+// network round-trip).
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/** Paginated listing (page is 1-based). Returns only the listing-model fields. */
+export async function fetchListingCourses(
+  page: number,
+  limit = PHOTOS_PAGE_SIZE,
+): Promise<ListingCourse[]> {
+  await delay(500);
+  const start = (page - 1) * limit;
+  return ALL_COURSES.slice(start, start + limit).map(
+    ({ id, title, category, rating, thumbnailUri }) => ({
+      id,
+      title,
+      category,
+      rating,
+      thumbnailUri,
+    }),
+  );
 }
 
-/** GET /products/:id → enriched course detail. `description` is localized UI copy
- *  supplied by the caller. */
-export async function fetchCourseDetail(id: string, description: string): Promise<CourseDetail> {
-  const { data } = await apiClient.get<Product>(`/products/${id}`);
-  return toCourseDetail(data, description);
+/** Fetch one course by id. */
+export async function fetchCourseDetail(id: string): Promise<CourseDetail> {
+  await delay(500);
+  const course = ALL_COURSES.find((c) => c.id === id);
+  if (!course) {
+    throw new Error(`Course ${id} not found`);
+  }
+  return course;
 }
