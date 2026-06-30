@@ -20,8 +20,7 @@
     },
     "language": {
       "restartTitle": "Restart required",
-      "restartMessage": "The app will restart to apply the new layout direction.",
-      "restartNow": "Restart now"
+      "restartMessage": "Please fully close and reopen the app to apply the new layout direction."
     },
     "settings": {
       "title": "Settings",
