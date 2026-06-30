@@ -58,6 +58,8 @@
     },
     "listing": {
       "title": "Listing",
+      "searchPlaceholder": "Search by title",
+      "noResults": "No results found",
       "errorTitle": "Couldn't load courses",
       "errorMessage": "Please check your connection and try again.",
       "retry": "Retry"

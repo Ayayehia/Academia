@@ -1,12 +1,12 @@
 import { type BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { type CompositeScreenProps } from '@react-navigation/native';
 import { type NativeStackScreenProps } from '@react-navigation/native-stack';
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, type ListRenderItem, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { CourseCard, ErrorState, Header } from '../../components';
+import { CourseCard, EmptyState, ErrorState, Header, Input } from '../../components';
 import { type ListingCourse } from '../../api/photos';
 import { usePhotosInfinite } from '../../hooks/usePhotosInfinite';
 import { type AppStackParamList, type MainTabsParamList } from '../../navigation/types';
@@ -35,6 +35,18 @@ export default function ListingScreen({ navigation }: Props) {
 
   // Flatten paginated results into a single list for the FlatList.
   const courses = useMemo(() => data?.pages.flat() ?? [], [data]);
+
+  // Case-insensitive title search over the loaded courses.
+  const [query, setQuery] = useState('');
+  const normalizedQuery = query.trim().toLowerCase();
+  const searching = normalizedQuery.length > 0;
+  const visible = useMemo(
+    () =>
+      searching
+        ? courses.filter((c) => c.title.toLowerCase().includes(normalizedQuery))
+        : courses,
+    [courses, searching, normalizedQuery],
+  );
 
   const onPressCourse = useCallback(
     (id: string) => navigation.navigate('CourseDetail', { courseId: id }),
@@ -72,25 +84,47 @@ export default function ListingScreen({ navigation }: Props) {
           onRetry={() => refetch()}
         />
       ) : (
-        <FlatList
-          data={courses}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          contentContainerStyle={{ padding: theme.spacing.md, gap: theme.spacing.md }}
-          showsVerticalScrollIndicator={false}
-          onEndReached={onEndReached}
-          onEndReachedThreshold={0.5}
-          initialNumToRender={6}
-          removeClippedSubviews
-          ListFooterComponent={
-            isFetchingNextPage ? (
-              <View style={{ paddingTop: theme.spacing.md }}>
-                {/* title is ignored in loading mode but required by the type. */}
-                <CourseCard title="" loading />
-              </View>
-            ) : null
-          }
-        />
+        <View style={styles.container}>
+          <View style={{ paddingHorizontal: theme.spacing.md, paddingTop: theme.spacing.md }}>
+            <Input
+              value={query}
+              onChangeText={setQuery}
+              placeholder={t('app.listing.searchPlaceholder')}
+              autoCapitalize="none"
+              autoCorrect={false}
+              returnKeyType="search"
+              clearButtonMode="while-editing"
+              accessibilityLabel={t('app.listing.searchPlaceholder')}
+            />
+          </View>
+
+          <FlatList
+            data={visible}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            contentContainerStyle={{
+              padding: theme.spacing.md,
+              gap: theme.spacing.md,
+              flexGrow: 1,
+            }}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            // Pagination only when not searching (search filters loaded items).
+            onEndReached={searching ? undefined : onEndReached}
+            onEndReachedThreshold={0.5}
+            initialNumToRender={6}
+            removeClippedSubviews
+            ListEmptyComponent={<EmptyState title={t('app.listing.noResults')} />}
+            ListFooterComponent={
+              !searching && isFetchingNextPage ? (
+                <View style={{ paddingTop: theme.spacing.md }}>
+                  {/* title is ignored in loading mode but required by the type. */}
+                  <CourseCard title="" loading />
+                </View>
+              ) : null
+            }
+          />
+        </View>
       )}
     </SafeAreaView>
   );
