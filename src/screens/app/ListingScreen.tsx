@@ -117,7 +117,13 @@ export default function ListingScreen({ navigation }: Props) {
               onChange={setFilter}
               options={[
                 { label: t('app.listing.tabAll'), value: 'all' },
-                { label: t('app.listing.tabFavorites'), value: 'favorites' },
+                {
+                  label:
+                    favorites.count > 0
+                      ? `${t('app.listing.tabFavorites')} (${favorites.count})`
+                      : t('app.listing.tabFavorites'),
+                  value: 'favorites',
+                },
               ]}
             />
           </View>
