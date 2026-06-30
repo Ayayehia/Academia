@@ -60,6 +60,11 @@
       "title": "القائمة",
       "searchPlaceholder": "ابحث بالعنوان",
       "noResults": "لا توجد نتائج",
+      "tabAll": "الكل",
+      "tabFavorites": "المفضلة",
+      "favorite": "أضف إلى المفضلة",
+      "unfavorite": "أزل من المفضلة",
+      "noFavorites": "لا توجد عناصر مفضلة بعد",
       "errorTitle": "تعذّر تحميل الدورات",
       "errorMessage": "يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
       "retry": "إعادة المحاولة"

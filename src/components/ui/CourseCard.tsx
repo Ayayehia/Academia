@@ -19,6 +19,12 @@ export interface CourseCardProps {
   /** Renders skeleton placeholders instead of content. */
   loading?: boolean;
   accessibilityLabel?: string;
+  /** When set, the card is favorited (filled heart). */
+  favorite?: boolean;
+  /** When provided, renders a favorite toggle in the card's top corner. */
+  onToggleFavorite?: () => void;
+  /** Announced label for the favorite toggle. */
+  favoriteAccessibilityLabel?: string;
 }
 
 function isImageSource(value: unknown): value is { uri: string } {
@@ -36,8 +42,28 @@ export function CourseCard({
   disabled = false,
   loading = false,
   accessibilityLabel,
+  favorite = false,
+  onToggleFavorite,
+  favoriteAccessibilityLabel,
 }: CourseCardProps) {
   const theme = useTheme();
+
+  // Optional favorite toggle, overlaid on the card's top corner.
+  const favoriteButton =
+    onToggleFavorite && !loading ? (
+      <Pressable
+        onPress={onToggleFavorite}
+        accessibilityRole="button"
+        accessibilityLabel={favoriteAccessibilityLabel}
+        accessibilityState={{ selected: favorite }}
+        hitSlop={8}
+        style={[styles.favorite, { backgroundColor: theme.colors.surface }]}
+      >
+        <Text style={{ color: favorite ? theme.colors.danger : theme.colors.textMuted, fontSize: 18 }}>
+          {favorite ? '♥' : '♡'}
+        </Text>
+      </Pressable>
+    ) : null;
 
   const cardStyle = {
     backgroundColor: theme.colors.surface,
@@ -86,7 +112,12 @@ export function CourseCard({
 
   // Static (non-interactive) card.
   if (!onPress || loading) {
-    return <View style={[styles.card, cardStyle]}>{content}</View>;
+    return (
+      <View style={[styles.card, cardStyle]}>
+        {content}
+        {favoriteButton}
+      </View>
+    );
   }
 
   return (
@@ -104,6 +135,7 @@ export function CourseCard({
       ]}
     >
       {content}
+      {favoriteButton}
     </Pressable>
   );
 }
@@ -124,4 +156,14 @@ const styles = StyleSheet.create({
   footer: { marginTop: 4 },
   pressed: { opacity: 0.85 },
   disabled: { opacity: 0.5 },
+  favorite: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

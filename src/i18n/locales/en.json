@@ -60,6 +60,11 @@
       "title": "Listing",
       "searchPlaceholder": "Search by title",
       "noResults": "No results found",
+      "tabAll": "All",
+      "tabFavorites": "Favorites",
+      "favorite": "Add to favorites",
+      "unfavorite": "Remove from favorites",
+      "noFavorites": "No favorites yet",
       "errorTitle": "Couldn't load courses",
       "errorMessage": "Please check your connection and try again.",
       "retry": "Retry"

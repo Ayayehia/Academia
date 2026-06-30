@@ -6,8 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, type ListRenderItem, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { CourseCard, EmptyState, ErrorState, Header, Input } from '../../components';
+import { CourseCard, EmptyState, ErrorState, Header, Input, SegmentedControl } from '../../components';
 import { type ListingCourse } from '../../api/photos';
+import { useFavorites } from '../../hooks/useFavorites';
 import { usePhotosInfinite } from '../../hooks/usePhotosInfinite';
 import { type AppStackParamList, type MainTabsParamList } from '../../navigation/types';
 import { useTheme } from '../../theme';
@@ -36,17 +37,25 @@ export default function ListingScreen({ navigation }: Props) {
   // Flatten paginated results into a single list for the FlatList.
   const courses = useMemo(() => data?.pages.flat() ?? [], [data]);
 
-  // Case-insensitive title search over the loaded courses.
+  // Favorites (local state) + the All/Favorites filter.
+  const favorites = useFavorites();
+  const [filter, setFilter] = useState<'all' | 'favorites'>('all');
+
+  // Case-insensitive title search over the loaded courses, then the favorites filter.
   const [query, setQuery] = useState('');
   const normalizedQuery = query.trim().toLowerCase();
   const searching = normalizedQuery.length > 0;
-  const visible = useMemo(
-    () =>
-      searching
-        ? courses.filter((c) => c.title.toLowerCase().includes(normalizedQuery))
-        : courses,
-    [courses, searching, normalizedQuery],
-  );
+  const visible = useMemo(() => {
+    let list = searching
+      ? courses.filter((c) => c.title.toLowerCase().includes(normalizedQuery))
+      : courses;
+    if (filter === 'favorites') {
+      list = list.filter((c) => favorites.ids.has(c.id));
+    }
+    return list;
+  }, [courses, searching, normalizedQuery, filter, favorites.ids]);
+
+  const paused = searching || filter === 'favorites';
 
   const onPressCourse = useCallback(
     (id: string) => navigation.navigate('CourseDetail', { courseId: id }),
@@ -63,8 +72,15 @@ export default function ListingScreen({ navigation }: Props) {
   const keyExtractor = useCallback((c: ListingCourse) => c.id, []);
 
   const renderItem: ListRenderItem<ListingCourse> = useCallback(
-    ({ item }) => <CourseListItem course={item} onPress={onPressCourse} />,
-    [onPressCourse],
+    ({ item }) => (
+      <CourseListItem
+        course={item}
+        onPress={onPressCourse}
+        favorite={favorites.ids.has(item.id)}
+        onToggleFavorite={favorites.toggle}
+      />
+    ),
+    [onPressCourse, favorites.ids, favorites.toggle],
   );
 
   return (
@@ -85,7 +101,7 @@ export default function ListingScreen({ navigation }: Props) {
         />
       ) : (
         <View style={styles.container}>
-          <View style={{ paddingHorizontal: theme.spacing.md, paddingTop: theme.spacing.md }}>
+          <View style={{ paddingHorizontal: theme.spacing.md, paddingTop: theme.spacing.md, gap: theme.spacing.sm }}>
             <Input
               value={query}
               onChangeText={setQuery}
@@ -95,6 +111,14 @@ export default function ListingScreen({ navigation }: Props) {
               returnKeyType="search"
               clearButtonMode="while-editing"
               accessibilityLabel={t('app.listing.searchPlaceholder')}
+            />
+            <SegmentedControl<'all' | 'favorites'>
+              value={filter}
+              onChange={setFilter}
+              options={[
+                { label: t('app.listing.tabAll'), value: 'all' },
+                { label: t('app.listing.tabFavorites'), value: 'favorites' },
+              ]}
             />
           </View>
 
@@ -109,14 +133,22 @@ export default function ListingScreen({ navigation }: Props) {
             }}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
-            // Pagination only when not searching (search filters loaded items).
-            onEndReached={searching ? undefined : onEndReached}
+            // Pagination only on the unfiltered "All" list (search/favorites filter loaded items).
+            onEndReached={paused ? undefined : onEndReached}
             onEndReachedThreshold={0.5}
             initialNumToRender={6}
             removeClippedSubviews
-            ListEmptyComponent={<EmptyState title={t('app.listing.noResults')} />}
+            ListEmptyComponent={
+              <EmptyState
+                title={
+                  filter === 'favorites' && favorites.count === 0
+                    ? t('app.listing.noFavorites')
+                    : t('app.listing.noResults')
+                }
+              />
+            }
             ListFooterComponent={
-              !searching && isFetchingNextPage ? (
+              !paused && isFetchingNextPage ? (
                 <View style={{ paddingTop: theme.spacing.md }}>
                   {/* title is ignored in loading mode but required by the type. */}
                   <CourseCard title="" loading />
@@ -135,10 +167,15 @@ export default function ListingScreen({ navigation }: Props) {
 const CourseListItem = memo(function CourseListItem({
   course,
   onPress,
+  favorite,
+  onToggleFavorite,
 }: {
   course: ListingCourse;
   onPress: (id: string) => void;
+  favorite: boolean;
+  onToggleFavorite: (id: string) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <CourseCard
       title={course.title}
@@ -146,6 +183,9 @@ const CourseListItem = memo(function CourseListItem({
       badge={{ label: course.category }}
       footer={<Rating value={course.rating} />}
       onPress={() => onPress(course.id)}
+      favorite={favorite}
+      onToggleFavorite={() => onToggleFavorite(course.id)}
+      favoriteAccessibilityLabel={t(favorite ? 'app.listing.unfavorite' : 'app.listing.favorite')}
     />
   );
 });
